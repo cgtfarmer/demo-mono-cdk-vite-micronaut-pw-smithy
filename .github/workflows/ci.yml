@@ -4,9 +4,12 @@ on:
   pull_request:
 
 jobs:
-  java-gradle:
-    name: Java-Gradle CI
+  api:
+    name: API CI
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./api
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -21,9 +24,32 @@ jobs:
       - name: Build
         run: gradle build --no-daemon
 
-  ts-npm:
-    name: TypeScript-NPM CI
+  smithy:
+    name: Smithy CI
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./smithy
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin' # 'corretto'
+          java-version: '21'
+          cache: 'gradle'
+
+      - name: Build
+        run: gradle build --no-daemon
+
+  cdk:
+    name: CDK CI
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./cdk
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -37,11 +63,45 @@ jobs:
       - name: Download dependencies
         run: npm ci
 
-      - name: Build
-        run: npm run build
+      - name: Format check
+        run: npm run format:check
 
       - name: Lint
         run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - name: Test
+        run: npm run test
+
+  ui:
+    name: UI CI
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ui
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Download dependencies
+        run: npm ci
+
+      - name: Format check
+        run: npm run format:check
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
 
       - name: Test
         run: npm run test
