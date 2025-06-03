@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    // "module":"commonjs",
+    // "moduleResolution":"node",
+    "module": "Node16",
+    "moduleResolution": "node16",
+    "noEmit": true,
+    "preserveConstEnums": true,
+    "skipLibCheck": true,
+    "sourceMap": false,
+    "strict": true,
+    "target": "es2020",
+  },
+  // "exclude": ["node_modules", "**/*.test.ts"]
+  "include": ["src", "eslint.config.mjs"]
+}

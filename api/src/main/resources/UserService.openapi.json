@@ -1,0 +1,319 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "UserService",
+        "version": "2025-01-01"
+    },
+    "paths": {
+        "/health": {
+            "get": {
+                "operationId": "GetHealth",
+                "responses": {
+                    "200": {
+                        "description": "GetHealth 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetHealthResponseContent"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "root"
+                ]
+            }
+        },
+        "/users": {
+            "get": {
+                "operationId": "ListUsers",
+                "responses": {
+                    "200": {
+                        "description": "ListUsers 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ListUsersResponseContent"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "user"
+                ]
+            },
+            "post": {
+                "operationId": "CreateUser",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateUserRequestContent"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "CreateUser 201 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateUserResponseContent"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "user"
+                ]
+            }
+        },
+        "/users/{userId}": {
+            "delete": {
+                "operationId": "DestroyUser",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "DestroyUser 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DestroyUserResponseContent"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "user"
+                ]
+            },
+            "get": {
+                "operationId": "GetUser",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "GetUser 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetUserResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "ResourceNotFound 404 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResourceNotFoundResponseContent"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "user"
+                ]
+            },
+            "put": {
+                "operationId": "PutUser",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PutUserRequestContent"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "PutUser 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PutUserResponseContent"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "user"
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CreateUserRequestContent": {
+                "type": "object",
+                "properties": {
+                    "user": {
+                        "$ref": "#/components/schemas/UserDto"
+                    }
+                },
+                "required": [
+                    "user"
+                ]
+            },
+            "CreateUserResponseContent": {
+                "type": "object",
+                "properties": {
+                    "user": {
+                        "$ref": "#/components/schemas/UserDto"
+                    }
+                },
+                "required": [
+                    "user"
+                ]
+            },
+            "DestroyUserResponseContent": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "success"
+                ]
+            },
+            "GetHealthResponseContent": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "message"
+                ]
+            },
+            "GetUserResponseContent": {
+                "type": "object",
+                "properties": {
+                    "user": {
+                        "$ref": "#/components/schemas/UserDto"
+                    }
+                },
+                "required": [
+                    "user"
+                ]
+            },
+            "ListUsersResponseContent": {
+                "type": "object",
+                "properties": {
+                    "users": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/UserDto"
+                        }
+                    }
+                },
+                "required": [
+                    "users"
+                ]
+            },
+            "PutUserRequestContent": {
+                "type": "object",
+                "properties": {
+                    "user": {
+                        "$ref": "#/components/schemas/UserDto"
+                    }
+                },
+                "required": [
+                    "user"
+                ]
+            },
+            "PutUserResponseContent": {
+                "type": "object",
+                "properties": {
+                    "user": {
+                        "$ref": "#/components/schemas/UserDto"
+                    }
+                },
+                "required": [
+                    "user"
+                ]
+            },
+            "ResourceNotFoundResponseContent": {
+                "type": "object",
+                "properties": {
+                    "resourceType": {
+                        "type": "string"
+                    },
+                    "resourceId": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "resourceType"
+                ]
+            },
+            "UserDto": {
+                "type": "object",
+                "properties": {
+                    "userId": {
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "type": "string"
+                    },
+                    "age": {
+                        "type": "number"
+                    },
+                    "weight": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "smoker": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "firstName"
+                ]
+            }
+        }
+    }
+}

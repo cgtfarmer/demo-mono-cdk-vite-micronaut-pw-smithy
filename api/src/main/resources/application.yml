@@ -1,0 +1,14 @@
+micronaut:
+  application:
+    name: app
+  # env:
+  #   cloud-deduction: true
+  # server:
+  #   context-path: ${MN_CONTEXT_PATH:`/`}
+  #   cors:
+  #     enabled: true
+  #     configurations:
+  #       ui:
+  #         allowed-origins:
+  #           - http://localhost:5173
+  #           - http://127.0.0.1:5173

@@ -1,0 +1,17 @@
+{
+  "version": "1.0",
+  "plugins": {
+    "openapi": {
+      "service": "com.cgtfarmer.user#UserService",
+      "version": "3.1.0",
+      "tags": true,
+      "protocol": "aws.protocols#restJson1"
+    },
+    "typescript-client-codegen": {
+      "service": "com.cgtfarmer.user#UserService",
+      "package": "@cgtfarmer/user-service-ts-client",
+      "packageVersion": "0.0.1",
+      "packageManager": "npm"
+    }
+  }
+}

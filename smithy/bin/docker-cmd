@@ -1,0 +1,21 @@
+#!/bin/bash -e
+
+SCRIPT_DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd )"
+SHARED_DIR="$(cd "${ROOT_DIR}/../shared" && pwd )"
+TS_CLIENT_BUILD_DIR="$ROOT_DIR/build/smithyprojections/smithy/source/typescript-client-codegen"
+TS_CLIENT_DESTINATION_DIR="$SHARED_DIR/clients/user-service-ts-client"
+OPENAPI_SPEC_BUILD_FILEPATH="$ROOT_DIR/build/smithyprojections/smithy/source/openapi/UserService.openapi.json"
+OPEN_API_SPEC_DESTINATION="$SHARED_DIR/openapi"
+
+./gradlew build
+
+cp -vr $OPENAPI_SPEC_BUILD_FILEPATH $OPEN_API_SPEC_DESTINATION
+
+if [[ ! -d $TS_CLIENT_DESTINATION_DIR ]]; then
+  mkdir $TS_CLIENT_DESTINATION_DIR
+fi
+
+cp -r $TS_CLIENT_BUILD_DIR/* $TS_CLIENT_DESTINATION_DIR
+
+exec "${@}"
